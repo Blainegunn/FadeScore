@@ -28,6 +28,8 @@ export interface Barber {
   website?: string;
   reviews?: ReviewSource[];
   barbers?: { name: string; slug?: string; rating: number; reviewCount: number }[];
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface Shop {
