@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getShopBySlug, getBarbersByShop } from "@/data/barbers";
 import { BarberCard } from "@/components/BarberCard";
@@ -56,8 +57,7 @@ export default async function ShopPage({ params }: Props) {
         <div className="px-6 sm:px-8 pb-8 -mt-14 relative">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="h-28 w-28 shrink-0 rounded-2xl bg-white border-4 border-white shadow-lg flex items-center justify-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/icons/barbershop.png"
                 alt=""
                 width={72}
@@ -97,8 +97,7 @@ export default async function ShopPage({ params }: Props) {
               {shop.name}
             </h1>
             <p className="text-fade-muted text-sm mt-2 flex items-center gap-1.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icons/pin.png" alt="" width={14} height={14} className="object-contain opacity-70 shrink-0" />
+              <Image src="/icons/pin.png" alt="" width={14} height={14} className="object-contain opacity-70 shrink-0" />
               {shop.city}, {shop.state}
             </p>
           </div>
@@ -106,8 +105,7 @@ export default async function ShopPage({ params }: Props) {
           <div className="flex flex-wrap gap-4 mt-8">
             <div className="rounded-xl bg-fade-canvas/80 border border-fade-navy/6 px-4 py-3 min-w-[100px]">
               <span className="text-lg font-bold text-fade-navy flex items-center gap-1">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/star-filled.png" alt="" width={20} height={20} className="inline-block" />
+                <Image src="/icons/star-filled.png" alt="" width={20} height={20} className="inline-block" />
                 {shop.fadeScore}
               </span>
               <span className="block text-xs text-fade-muted mt-0.5">FadeScore</span>

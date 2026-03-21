@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { HairType, CutType } from "@/types";
 import { HAIR_TYPE_LABELS, CUT_TYPE_LABELS } from "@/lib/filters";
@@ -79,8 +80,7 @@ export function SearchForm({
           <label htmlFor="search-q" className="sr-only">
             City or zip code
           </label>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/icons/search.png"
             alt=""
             width={18}
@@ -117,8 +117,7 @@ export function SearchForm({
           type="submit"
           className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-fade-navy text-white text-sm font-semibold hover:bg-fade-navy/90 shrink-0 shadow-md shadow-fade-navy/15"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/icons/search.png"
             alt=""
             width={16}

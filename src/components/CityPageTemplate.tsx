@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Barber } from "@/types";
 import { getCityPageStats } from "@/lib/data";
 import { CityFilters } from "@/components/CityFilters";
@@ -130,7 +131,7 @@ export function CityPageTemplate({
                   {b.name}
                 </Link>
                 <span className="text-fade-muted text-sm ml-2">
-                  at <Link href={`/shop/${b.shopSlug}`} className="font-name hover:text-fade-accent hover:underline">{b.shopName}</Link> · {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/icons/star-filled.png" alt="" width={14} height={14} className="inline-block -mt-0.5" /> {b.fadeScore} · Avg ${b.avgPrice}
+                  at <Link href={`/shop/${b.shopSlug}`} className="font-name hover:text-fade-accent hover:underline">{b.shopName}</Link> · <Image src="/icons/star-filled.png" alt="" width={14} height={14} className="inline-block -mt-0.5" /> {b.fadeScore} · Avg ${b.avgPrice}
                 </span>
               </li>
             ))}
@@ -148,7 +149,7 @@ export function CityPageTemplate({
                   {b.name}
                 </Link>
                 <span className="text-fade-muted text-sm ml-2">
-                  at <Link href={`/shop/${b.shopSlug}`} className="font-name hover:text-fade-accent hover:underline">{b.shopName}</Link> · {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/icons/star-filled.png" alt="" width={14} height={14} className="inline-block -mt-0.5" /> {b.fadeScore} · Avg ${b.avgPrice}
+                  at <Link href={`/shop/${b.shopSlug}`} className="font-name hover:text-fade-accent hover:underline">{b.shopName}</Link> · <Image src="/icons/star-filled.png" alt="" width={14} height={14} className="inline-block -mt-0.5" /> {b.fadeScore} · Avg ${b.avgPrice}
                 </span>
               </li>
             ))}

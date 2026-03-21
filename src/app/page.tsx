@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { Suspense } from "react";
 import { HomeSearch } from "@/components/HomeSearch";
 import { getAllBarbersForHiddenGems } from "@/data/barbers";
 
@@ -22,10 +24,18 @@ function formatCityName(slug: string) {
     .join(" ");
 }
 
-export default async function HomePage() {
+async function HiddenGemsCount() {
   const hiddenGems = await getAllBarbersForHiddenGems();
-  const hiddenGemsCount = hiddenGems.length;
+  const count = hiddenGems.length;
+  if (count === 0) return null;
+  return (
+    <span className="font-medium text-fade-accent">
+      See {count}+ barbers
+    </span>
+  );
+}
 
+export default function HomePage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-24">
       <section className="pt-12 sm:pt-16 pb-10 sm:pb-14">
@@ -70,8 +80,7 @@ export default async function HomePage() {
             className="rounded-2xl bg-white/80 border border-fade-navy/6 p-6 shadow-sm"
           >
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-fade-canvas border border-fade-navy/8 mb-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={card.icon}
                 alt=""
                 width={28}
@@ -90,8 +99,7 @@ export default async function HomePage() {
         className="mt-10 flex items-center gap-4 p-5 rounded-2xl border border-fade-navy/8 bg-white/90 shadow-sm hover:border-fade-accent/35 hover:shadow-md transition-all"
       >
         <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fade-canvas border border-fade-navy/8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/diamond.png" alt="" width={24} height={24} />
+          <Image src="/icons/diamond.png" alt="" width={24} height={24} />
         </span>
         <div>
           <p className="font-semibold text-fade-navy">
@@ -99,11 +107,9 @@ export default async function HomePage() {
           </p>
           <p className="text-sm text-fade-muted">
             Best value barbers — great cuts without the premium price.{" "}
-            {hiddenGemsCount > 0 && (
-              <span className="font-medium text-fade-accent">
-                See {hiddenGemsCount}+ barbers
-              </span>
-            )}
+            <Suspense>
+              <HiddenGemsCount />
+            </Suspense>
           </p>
         </div>
       </Link>
@@ -131,8 +137,7 @@ export default async function HomePage() {
         <div className="relative max-w-lg">
           <div className="flex items-center gap-3 mb-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-fade-canvas border border-fade-navy/10 shadow-sm">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/icons/chair.png"
                 alt=""
                 width={28}

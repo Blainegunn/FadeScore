@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { createSupabaseAdmin } from "@/lib/supabase/admin";
 
 interface UserReviewsProps {
@@ -25,8 +26,7 @@ export async function UserReviews({ barberId }: UserReviewsProps) {
             <div className="flex items-center gap-2 mb-1">
               <span className="flex gap-0.5">
                 {[1, 2, 3, 4, 5].map((s) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     key={s}
                     src={s <= r.rating ? "/icons/star-filled.png" : "/icons/star-empty.png"}
                     alt=""

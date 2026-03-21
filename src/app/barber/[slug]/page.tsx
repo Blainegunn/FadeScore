@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getBarberBySlug, getBarbersByCity } from "@/data/barbers";
 import { BarberCard } from "@/components/BarberCard";
@@ -105,24 +106,21 @@ export default async function BarberProfilePage({ params }: Props) {
           <dl className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div className="rounded-xl bg-fade-canvas/80 border border-fade-navy/6 px-4 py-3">
               <dt className="text-xs font-medium text-fade-muted uppercase tracking-wide flex items-center gap-1.5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/star-filled.png" alt="" width={14} height={14} className="object-contain opacity-80" />
+                <Image src="/icons/star-filled.png" alt="" width={14} height={14} className="object-contain opacity-80" />
                 FadeScore
               </dt>
               <dd className="text-lg font-semibold text-fade-navy mt-1">{barber.fadeScore}</dd>
             </div>
             <div className="rounded-xl bg-fade-canvas/80 border border-fade-navy/6 px-4 py-3">
               <dt className="text-xs font-medium text-fade-muted uppercase tracking-wide flex items-center gap-1.5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/hair-clipper.png" alt="" width={14} height={14} className="object-contain opacity-80" />
+                <Image src="/icons/hair-clipper.png" alt="" width={14} height={14} className="object-contain opacity-80" />
                 Avg cut
               </dt>
               <dd className="text-lg font-semibold text-fade-navy mt-1">${barber.avgPrice}</dd>
             </div>
             <div className="rounded-xl bg-fade-canvas/80 border border-fade-navy/6 px-4 py-3">
               <dt className="text-xs font-medium text-fade-muted uppercase tracking-wide flex items-center gap-1.5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/reviews.png" alt="" width={14} height={14} className="object-contain opacity-80" />
+                <Image src="/icons/reviews.png" alt="" width={14} height={14} className="object-contain opacity-80" />
                 Reviews
               </dt>
               <dd className="text-lg font-semibold text-fade-navy mt-1">{barber.reviewCount}</dd>

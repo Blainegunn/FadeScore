@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getAllBarbersForHiddenGems } from "@/data/barbers";
 import { BarberCard } from "@/components/BarberCard";
 
@@ -15,7 +16,7 @@ export default async function HiddenGemBarbersPage() {
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 py-10 pb-16">
       <h1 className="text-4xl font-bold tracking-tight text-fade-navy mb-4">
-{/* eslint-disable-next-line @next/next/no-img-element */}<img src="/icons/diamond.png" alt="" width={32} height={32} className="inline-block -mt-1 mr-2" />
+<Image src="/icons/diamond.png" alt="" width={32} height={32} className="inline-block -mt-1 mr-2" />
         These Barbers Charge Under $30 and Have a 4.8+ Rating
       </h1>
       <p className="text-lg text-fade-muted mb-4">

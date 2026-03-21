@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 function LogoLink({ href }: { href: string }) {
   return (
@@ -8,16 +9,14 @@ function LogoLink({ href }: { href: string }) {
       href={href}
       className="flex items-center shrink-0 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-fade-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-fade-canvas"
     >
-      <span className="inline-flex">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/branding/logo.png"
-          alt="FadeScore"
-          width={1024}
-          height={682}
-          className="h-9 sm:h-10 w-auto max-w-[min(100vw-8rem,220px)] object-contain object-left"
-        />
-      </span>
+      <Image
+        src="/branding/logo.png"
+        alt="FadeScore"
+        width={192}
+        height={128}
+        priority
+        className="h-9 sm:h-10 w-auto max-w-[min(100vw-8rem,220px)] object-contain object-left"
+      />
     </Link>
   );
 }

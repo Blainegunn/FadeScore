@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { submitReview, verifyReviewEmail } from "@/app/barber/[slug]/actions";
 
 interface ReviewFormProps {
@@ -101,8 +102,7 @@ export function ReviewForm({ barberSlug, barberId }: ReviewFormProps) {
             onMouseLeave={() => setHoverRating(0)}
             className="transition-transform hover:scale-110"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={star <= (hoverRating || rating) ? "/icons/star-filled.png" : "/icons/star-empty.png"}
               alt={`${star} star`}
               width={28}

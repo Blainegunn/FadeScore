@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 const RADII = [1, 5, 10, 25, 50, 100] as const;
 
 export function HomeSearch() {
@@ -23,8 +24,7 @@ export function HomeSearch() {
     <form onSubmit={handleSubmit} className="w-full max-w-xl">
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/icons/search.png"
             alt=""
             width={20}
@@ -54,8 +54,7 @@ export function HomeSearch() {
           type="submit"
           className="inline-flex items-center justify-center gap-2 rounded-full bg-fade-accent px-8 py-3.5 text-sm font-semibold text-fade-navy shadow-sm shadow-fade-accent/30 hover:bg-fade-accent/90 transition-colors whitespace-nowrap"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/icons/search.png"
             alt=""
             width={18}

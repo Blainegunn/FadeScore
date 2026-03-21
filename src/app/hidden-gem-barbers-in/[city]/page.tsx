@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getCityBySlug } from "@/lib/data";
 import { getBarbersByCity } from "@/data/barbers";
@@ -44,7 +45,7 @@ export default async function HiddenGemCityPage({ params }: Props) {
       </nav>
 
       <h1 className="text-4xl font-bold tracking-tight mb-4">
-        {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/icons/diamond.png" alt="" width={32} height={32} className="inline-block -mt-1 mr-2" />
+        <Image src="/icons/diamond.png" alt="" width={32} height={32} className="inline-block -mt-1 mr-2" />
         Hidden Gem Barbers in {city.name}
       </h1>
       <p className="text-lg text-fade-muted mb-4">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import { getCityBySlug, getAllCities } from "@/data/cities";
 import { getBarbersByCity } from "@/data/barbers";
@@ -311,8 +312,7 @@ export default async function SearchPage({ searchParams }: Props) {
         {priceInsight && (
           <div className="mb-8 rounded-2xl border border-fade-navy/8 bg-white p-5 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/icons/chair.png" alt="" width={24} height={24} className="opacity-80" />
+              <Image src="/icons/chair.png" alt="" width={24} height={24} className="opacity-80" />
               <h3 className="text-base font-semibold text-fade-navy">
                 What a good haircut costs in {priceInsight.locationLabel}
               </h3>

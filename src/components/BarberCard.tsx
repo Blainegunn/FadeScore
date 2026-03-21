@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { Barber } from "@/types";
 import { getEffectiveCutTypes } from "@/lib/filters";
 import { CUT_TYPE_LABELS } from "@/lib/filters";
@@ -41,8 +42,7 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fade-canvas border border-fade-navy/8 group-hover:border-fade-accent/25 transition-colors">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={isBarber ? "/icons/user.png" : "/icons/barbershop.png"}
             alt=""
             width={28}
@@ -57,8 +57,7 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
           <div className="flex flex-wrap justify-end gap-1">
             {barber.isHiddenGem && (
               <span className="inline-flex items-center gap-1 text-xs font-medium text-fade-accent">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/icons/diamond.png" alt="" width={14} height={14} />
+                <Image src="/icons/diamond.png" alt="" width={14} height={14} />
                 Hidden Gem
               </span>
             )}
@@ -72,8 +71,7 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
       </div>
 
       <p className="text-sm font-semibold text-fade-navy tabular-nums">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/icons/star-filled.png"
           alt=""
           width={16}
@@ -90,8 +88,7 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
         {barber.name}
       </h3>
       <p className="text-sm text-fade-muted mt-1 flex items-center gap-1">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/barbershop.png" alt="" width={14} height={14} />
+        <Image src="/icons/barbershop.png" alt="" width={14} height={14} />
         <span
           role="link"
           onClick={(e) => {
@@ -105,22 +102,19 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
         </span>
       </p>
       <p className="text-sm text-fade-muted mt-1 flex items-center gap-1">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/pin.png" alt="" width={14} height={14} />
+        <Image src="/icons/pin.png" alt="" width={14} height={14} />
         {barber.city}, {barber.state}
         {distanceMiles != null && (
           <span className="ml-1">· {distanceMiles} mi</span>
         )}
       </p>
       <div className="flex items-center gap-1 text-sm text-fade-muted mt-2">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/reviews.png" alt="" width={14} height={14} />
+        <Image src="/icons/reviews.png" alt="" width={14} height={14} />
         <span>{barber.reviewCount} reviews</span>
       </div>
       {cutTypes.length > 0 && (
         <div className="flex items-center flex-wrap gap-1.5 mt-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/hair-clipper.png" alt="" width={14} height={14} className="mr-0.5 opacity-80" />
+          <Image src="/icons/hair-clipper.png" alt="" width={14} height={14} className="mr-0.5 opacity-80" />
           {cutTypes.map((ct) => (
             <span
               key={ct}
