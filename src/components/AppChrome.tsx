@@ -24,7 +24,7 @@ function LogoLink({ href }: { href: string }) {
 
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b border-fade-navy/10 bg-fade-canvas/90 backdrop-blur-md">
+    <header className="hidden sm:block sticky top-0 z-10 border-b border-fade-navy/10 bg-fade-canvas/90 backdrop-blur-md">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
         <LogoLink href="/" />
         {/* Desktop nav — hidden on mobile */}

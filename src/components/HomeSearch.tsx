@@ -17,7 +17,7 @@ export function HomeSearch() {
     const params = new URLSearchParams();
     params.set("q", q);
     params.set("radius", radius);
-    router.push(`/search?${params.toString()}`);
+    router.push(`/search?${params.toString()}#results`);
   }
 
   return (

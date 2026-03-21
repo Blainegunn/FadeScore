@@ -282,7 +282,7 @@ export default async function SearchPage({ searchParams }: Props) {
         />
       </Suspense>
 
-      <section className="mt-12">
+      <section id="results" className="mt-12 scroll-mt-20">
         <h2 className="text-2xl font-semibold text-fade-navy mb-2">{heading}</h2>
         <p className="text-fade-muted mb-6">{subheading}</p>
 
