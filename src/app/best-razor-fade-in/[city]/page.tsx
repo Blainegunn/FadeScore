@@ -6,7 +6,6 @@ import { CUT_TYPE_ROUTE_MAP } from "@/lib/seo";
 import { filterBarbers } from "@/lib/filters";
 import { CityPageTemplate } from "@/components/CityPageTemplate";
 
-export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 const ROUTE = CUT_TYPE_ROUTE_MAP.get("razor-fade")!;

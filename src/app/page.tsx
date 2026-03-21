@@ -2,7 +2,6 @@ import Link from "next/link";
 import { HomeSearch } from "@/components/HomeSearch";
 import { getAllBarbersForHiddenGems } from "@/data/barbers";
 
-export const dynamic = "force-dynamic";
 
 const POPULAR_CITIES = [
   "new-york",

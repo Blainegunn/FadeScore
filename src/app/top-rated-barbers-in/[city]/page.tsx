@@ -6,7 +6,6 @@ import { getBarbersByCity } from "@/data/barbers";
 import { BarberCard } from "@/components/BarberCard";
 import { getCutTypeLinks, getHairTypeLinks } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 interface Props {

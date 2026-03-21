@@ -3,7 +3,6 @@ import Link from "next/link";
 import { getAllShops } from "@/data/barbers";
 import { IntakeForm } from "./IntakeForm";
 
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Barber intake | Confirm your listing | FadeScore",

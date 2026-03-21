@@ -4,7 +4,6 @@ import { CityPageTemplate } from "@/components/CityPageTemplate";
 import { getCityBySlug } from "@/lib/data";
 import { getBarbersByCity } from "@/data/barbers";
 
-export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 interface Props {

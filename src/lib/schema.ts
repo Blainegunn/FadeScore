@@ -4,27 +4,28 @@ import type { Barber, Shop } from "@/types";
  * Schema.org JSON-LD generators for SEO rich results.
  */
 
-/** Barber profile page — Person + BarberShop */
+/** Barber profile page — LocalBusiness with employee */
 export function getBarberJsonLd(barber: Barber) {
   return {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: barber.name,
-    jobTitle: "Barber",
-    worksFor: {
-      "@type": "BarberShop",
-      name: barber.shopName,
-      ...(barber.address && { address: barber.address }),
-      ...(barber.phone && { telephone: barber.phone }),
-      ...(barber.website && { url: barber.website }),
-    },
+    "@type": "LocalBusiness",
+    name: `${barber.name} at ${barber.shopName}`,
     ...(barber.address && {
       address: {
         "@type": "PostalAddress",
+        streetAddress: barber.address,
         addressLocality: barber.city,
         addressRegion: barber.state,
       },
     }),
+    ...(barber.phone && { telephone: barber.phone }),
+    ...(barber.website && { url: barber.website }),
+    url: `https://fadescore.com/barber/${barber.slug}`,
+    employee: {
+      "@type": "Person",
+      name: barber.name,
+      jobTitle: "Barber",
+    },
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: barber.fadeScore,
@@ -32,6 +33,7 @@ export function getBarberJsonLd(barber: Barber) {
       worstRating: 1,
       reviewCount: barber.reviewCount,
     },
+    priceRange: `$${barber.avgPrice}`,
   };
 }
 
@@ -39,7 +41,7 @@ export function getBarberJsonLd(barber: Barber) {
 export function getShopJsonLd(shop: Shop) {
   return {
     "@context": "https://schema.org",
-    "@type": "BarberShop",
+    "@type": "LocalBusiness",
     name: shop.name,
     ...(shop.address && {
       address: {
@@ -79,7 +81,7 @@ export function getCityListJsonLd(
       "@type": "ListItem",
       position: i + 1,
       item: {
-        "@type": "BarberShop",
+        "@type": "LocalBusiness",
         name: `${barber.name} at ${barber.shopName}`,
         url: `https://fadescore.com/barber/${barber.slug}`,
         aggregateRating: {
