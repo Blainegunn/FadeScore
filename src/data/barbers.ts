@@ -6,7 +6,9 @@ import { createSupabaseAdmin } from "@/lib/supabase/admin";
  * Return types match the existing Barber/Shop interfaces.
  */
 
-const supabase = createSupabaseAdmin();
+function getSupabase() {
+  return createSupabaseAdmin();
+}
 
 // ── Mappers ────────────────────────────────────────────────────────
 
@@ -90,7 +92,7 @@ const BARBER_SELECT = `
 // ── Queries ────────────────────────────────────────────────────────
 
 export async function getBarbersByCity(citySlug: string): Promise<Barber[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("barbers")
     .select(BARBER_SELECT)
     .eq("shops.cities.slug", citySlug)
@@ -105,7 +107,7 @@ export async function getBarbersByCity(citySlug: string): Promise<Barber[]> {
 }
 
 export async function getAllBarbers(): Promise<Barber[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("barbers")
     .select(BARBER_SELECT)
     .order("name");
@@ -120,7 +122,7 @@ export async function getAllBarbers(): Promise<Barber[]> {
 }
 
 export async function getBarberBySlug(slug: string): Promise<Barber | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("barbers")
     .select(BARBER_SELECT)
     .eq("slug", slug)
@@ -131,7 +133,7 @@ export async function getBarberBySlug(slug: string): Promise<Barber | null> {
   const barber = mapBarberRow(data as any);
 
   // Also load team/barbers at same shop
-  const { data: teamData } = await supabase
+  const { data: teamData } = await getSupabase()
     .from("barbers")
     .select("name, slug, fade_score, review_count")
     .eq("shop_id", (data as Record<string, unknown>).shop_id as string);
@@ -149,7 +151,7 @@ export async function getBarberBySlug(slug: string): Promise<Barber | null> {
 }
 
 export async function getAllBarbersForHiddenGems(): Promise<Barber[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("barbers")
     .select(BARBER_SELECT)
     .eq("is_hidden_gem", true)
@@ -165,7 +167,7 @@ export async function getAllBarbersForHiddenGems(): Promise<Barber[]> {
 }
 
 export async function getShopsForCity(citySlug: string): Promise<Shop[]> {
-  const { data: cityData } = await supabase
+  const { data: cityData } = await getSupabase()
     .from("cities")
     .select("id")
     .eq("slug", citySlug)
@@ -173,7 +175,7 @@ export async function getShopsForCity(citySlug: string): Promise<Shop[]> {
 
   if (!cityData) return [];
 
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("shops")
     .select(`
       id, slug, name, address, phone, instagram, website,
@@ -216,7 +218,7 @@ export async function getShopsForCity(citySlug: string): Promise<Shop[]> {
 }
 
 export async function getShopBySlug(slug: string): Promise<(Shop & { bookingUrl?: string; claimedBy?: string }) | null> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("shops")
     .select(`
       id, slug, name, address, phone, instagram, website,
@@ -257,7 +259,7 @@ export async function getShopBySlug(slug: string): Promise<(Shop & { bookingUrl?
 }
 
 export async function getBarbersByShop(shopSlug: string): Promise<Barber[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("barbers")
     .select(BARBER_SELECT)
     .eq("shops.slug", shopSlug)
@@ -273,7 +275,7 @@ export async function getBarbersByShop(shopSlug: string): Promise<Barber[]> {
 
 /** Get all shops (for intake autocomplete). */
 export async function getAllShops(): Promise<{ slug: string; name: string; city: string; state: string }[]> {
-  const { data, error } = await supabase
+  const { data, error } = await getSupabase()
     .from("shops")
     .select("slug, name, cities!inner ( name, state )")
     .order("name");
@@ -293,12 +295,12 @@ export async function getAllShops(): Promise<{ slug: string; name: string; city:
 
 /** Get all barber slugs (for sitemap generation). */
 export async function getAllBarberSlugs(): Promise<string[]> {
-  const { data } = await supabase.from("barbers").select("slug");
+  const { data } = await getSupabase().from("barbers").select("slug");
   return (data ?? []).map((r) => r.slug);
 }
 
 /** Get all shop slugs (for sitemap generation). */
 export async function getAllShopSlugs(): Promise<string[]> {
-  const { data } = await supabase.from("shops").select("slug");
+  const { data } = await getSupabase().from("shops").select("slug");
   return (data ?? []).map((r) => r.slug);
 }
