@@ -7,7 +7,7 @@ import { getBarbersByCity } from "@/data/barbers";
 import { getZipInfo } from "@/data/zips";
 import { getCitiesWithinRadius } from "@/lib/geo";
 import { parseQueryParts, geocodeCity } from "@/lib/geocode";
-import { BarberCard } from "@/components/BarberCard";
+import { SearchResultsList } from "./SearchResultsList";
 import { SearchForm } from "./SearchForm";
 import { SearchResultsToolbar, type SortOption } from "./SearchResultsToolbar";
 import { filterBarbers } from "@/lib/filters";
@@ -351,18 +351,10 @@ export default async function SearchPage({ searchParams }: Props) {
         )}
 
         {results.length > 0 ? (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 list-none p-0 m-0">
-            {results.map(({ barber, distanceMiles }, i) => (
-              <li key={barber.id} className="h-full">
-                <BarberCard
-                  barber={barber}
-                  rank={!searchedByZip && !searchedByGeocode ? i + 1 : undefined}
-                  distanceMiles={distanceMiles}
-                  showVerified={false}
-                />
-              </li>
-            ))}
-          </ul>
+          <SearchResultsList
+            results={results}
+            showRanks={!searchedByZip && !searchedByGeocode}
+          />
         ) : q ? (
           <CityWaitlist cityName={q} />
         ) : (

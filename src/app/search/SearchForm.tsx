@@ -115,14 +115,14 @@ export function SearchForm({
         </div>
         <button
           type="submit"
-          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-fade-navy text-white text-sm font-semibold hover:bg-fade-navy/90 shrink-0 shadow-md shadow-fade-navy/15"
+          className="inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-full bg-fade-accent text-fade-navy text-sm font-semibold hover:bg-fade-accent/90 shrink-0 shadow-sm shadow-fade-accent/30 transition-colors"
         >
           <Image
             src="/icons/search.png"
             alt=""
             width={16}
             height={16}
-            className="brightness-0 invert opacity-90"
+            className="opacity-90"
           />
           Search
         </button>
