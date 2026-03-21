@@ -12,20 +12,13 @@ const RADII = [1, 5, 10, 25, 50, 100] as const;
 
 function FilterIcon({ className }: { className?: string }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-    </svg>
+    <Image
+      src="/icons/filter.png"
+      alt=""
+      width={18}
+      height={18}
+      className={`object-contain shrink-0 opacity-90 ${className ?? ""}`}
+    />
   );
 }
 
@@ -152,10 +145,14 @@ export function SearchForm({
           <input
             id="search-q"
             name="q"
-            type="text"
+            type="search"
+            inputMode="search"
+            enterKeyHint="search"
+            autoCapitalize="words"
+            autoCorrect="off"
             placeholder="City name or zip code"
             defaultValue={currentQuery}
-            className="w-full rounded-full border border-fade-navy/12 bg-white pl-10 pr-4 py-2.5 text-sm text-fade-navy placeholder:text-fade-muted/70 focus:outline-none focus:ring-2 focus:ring-fade-accent/50"
+            className="w-full rounded-full border border-fade-navy/12 bg-white pl-10 pr-4 py-2.5 text-sm text-fade-navy placeholder:text-fade-muted/70 focus:outline-none focus:ring-2 focus:ring-fade-accent/50 [appearance:textfield] [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
           />
         </div>
         <div className="flex gap-3">
@@ -180,6 +177,8 @@ export function SearchForm({
           {/* Mobile filter toggle */}
           <button
             type="button"
+            aria-label="Hair and cut filters"
+            aria-expanded={filtersOpen}
             onClick={() => setFiltersOpen((prev) => !prev)}
             className={`sm:hidden inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full text-sm font-medium border transition-colors ${
               activeFilterCount > 0

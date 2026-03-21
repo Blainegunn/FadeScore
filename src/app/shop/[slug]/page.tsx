@@ -96,9 +96,28 @@ export default async function ShopPage({ params }: Props) {
             <h1 className="font-name text-2xl sm:text-3xl font-semibold text-fade-navy tracking-tight">
               {shop.name}
             </h1>
-            <p className="text-fade-muted text-sm mt-2 flex items-center gap-1.5">
-              <Image src="/icons/pin.png" alt="" width={14} height={14} className="object-contain opacity-70 shrink-0" />
-              {shop.city}, {shop.state}
+            <p className="text-fade-muted text-sm mt-2 flex items-start gap-1.5">
+              <Image
+                src="/icons/pin.png"
+                alt=""
+                width={14}
+                height={14}
+                className="object-contain opacity-70 shrink-0 mt-0.5"
+              />
+              <span className="min-w-0 break-words leading-snug">
+                {shop.address ? (
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(shop.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-fade-accent hover:underline"
+                  >
+                    {shop.address}
+                  </a>
+                ) : (
+                  `${shop.city}, ${shop.state}`
+                )}
+              </span>
             </p>
           </div>
 

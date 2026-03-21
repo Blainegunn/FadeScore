@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import type { HairType, CutType } from "@/types";
@@ -170,7 +171,16 @@ export function SearchResultsToolbar({
 
       {hasActiveFilters && (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-fade-muted">Active filters:</span>
+          <span className="inline-flex items-center gap-1.5 text-xs text-fade-muted">
+            <Image
+              src="/icons/filter.png"
+              alt=""
+              width={14}
+              height={14}
+              className="object-contain opacity-80 shrink-0"
+            />
+            Active filters:
+          </span>
           {defaultSort !== "value" && (
             <span className="inline-flex items-center rounded-full bg-fade-accent/15 px-2.5 py-0.5 text-xs font-medium text-fade-navy">
               {SORT_LABELS[defaultSort]}

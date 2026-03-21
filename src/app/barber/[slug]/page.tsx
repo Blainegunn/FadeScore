@@ -93,7 +93,29 @@ export default async function BarberProfilePage({ params }: Props) {
               >
                 {barber.shopName}
               </Link>
-              <span className="text-fade-muted"> · {barber.city}, {barber.state}</span>
+            </p>
+            <p className="text-fade-muted text-sm mt-2 flex items-start gap-1.5">
+              <Image
+                src="/icons/pin.png"
+                alt=""
+                width={14}
+                height={14}
+                className="object-contain opacity-70 shrink-0 mt-0.5"
+              />
+              <span className="min-w-0 break-words leading-snug">
+                {barber.address ? (
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(barber.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-fade-accent hover:underline"
+                  >
+                    {barber.address}
+                  </a>
+                ) : (
+                  `${barber.city}, ${barber.state}`
+                )}
+              </span>
             </p>
           </div>
 

@@ -32,11 +32,16 @@ export function HomeSearch() {
             className="absolute left-4 top-1/2 -translate-y-1/2 opacity-45 pointer-events-none"
           />
           <input
-            type="text"
+            type="search"
+            name="q"
+            inputMode="search"
+            enterKeyHint="search"
+            autoCapitalize="words"
+            autoCorrect="off"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="City name or zip code"
-            className="w-full rounded-full border border-fade-navy/12 bg-white pl-12 pr-5 py-3.5 text-fade-navy placeholder:text-fade-muted/70 shadow-sm focus:outline-none focus:ring-2 focus:ring-fade-accent/50 focus:border-fade-accent/40"
+            className="w-full rounded-full border border-fade-navy/12 bg-white pl-12 pr-5 py-3.5 text-fade-navy placeholder:text-fade-muted/70 shadow-sm focus:outline-none focus:ring-2 focus:ring-fade-accent/50 focus:border-fade-accent/40 [appearance:textfield] [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
           />
         </div>
         <select

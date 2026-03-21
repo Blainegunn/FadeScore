@@ -22,12 +22,19 @@ function isIndividualBarber(barber: Barber): boolean {
   return barber.name.toLowerCase() !== barber.shopName.toLowerCase();
 }
 
+function formatCardLocation(barber: Barber): string {
+  const street = barber.address?.trim();
+  if (street) return street;
+  return `${barber.city}, ${barber.state}`;
+}
+
 export function BarberCard({ barber, rank, distanceMiles, showVerified = true }: BarberCardProps) {
   const cutTypes = getEffectiveCutTypes(barber).slice(0, 3);
   const showBestValue = isBestValue(barber);
   const isBarber = isIndividualBarber(barber);
   const { toggle, isSelected, isFull } = useCompare();
   const selected = isSelected(barber.slug);
+  const locationLabel = formatCardLocation(barber);
 
   function handleCompare(e: React.MouseEvent) {
     e.preventDefault();
@@ -62,7 +69,14 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
               </span>
             )}
             {showBestValue && !barber.isHiddenGem && (
-              <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-800">
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-800">
+                <Image
+                  src="/icons/piggy-bank.png"
+                  alt=""
+                  width={14}
+                  height={14}
+                  className="object-contain shrink-0"
+                />
                 Best value
               </span>
             )}
@@ -101,12 +115,20 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
           {barber.shopName}
         </span>
       </p>
-      <p className="text-sm text-fade-muted mt-1 flex items-center gap-1">
-        <Image src="/icons/pin.png" alt="" width={14} height={14} />
-        {barber.city}, {barber.state}
-        {distanceMiles != null && (
-          <span className="ml-1">· {distanceMiles} mi</span>
-        )}
+      <p className="text-sm text-fade-muted mt-1 flex items-start gap-1.5">
+        <Image
+          src="/icons/pin.png"
+          alt=""
+          width={14}
+          height={14}
+          className="shrink-0 mt-0.5"
+        />
+        <span className="min-w-0 break-words leading-snug">
+          {locationLabel}
+          {distanceMiles != null && (
+            <span className="whitespace-nowrap"> · {distanceMiles} mi</span>
+          )}
+        </span>
       </p>
       <div className="flex items-center gap-1 text-sm text-fade-muted mt-2">
         <Image src="/icons/reviews.png" alt="" width={14} height={14} />

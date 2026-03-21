@@ -6,6 +6,22 @@
   h1 {
     @apply font-display;
   }
+
+  /* iOS Safari zooms focused inputs when font-size < 16px */
+  @media (max-width: 639px) {
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="number"],
+    input[type="password"],
+    input:not([type]),
+    textarea,
+    select {
+      font-size: 1rem;
+    }
+  }
 }
 
 :root {

@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { getCityBySlug, getAllCities } from "@/data/cities";
 import { getBarbersByCity } from "@/data/barbers";
 import { getZipInfo } from "@/data/zips";
-import { getCitiesWithinRadius } from "@/lib/geo";
+import { getCitiesWithinRadius, distanceMiles } from "@/lib/geo";
 import { parseQueryParts, geocodeCity } from "@/lib/geocode";
 import { SearchResultsList } from "./SearchResultsList";
 import { SearchForm } from "./SearchForm";
@@ -131,7 +131,11 @@ export default async function SearchPage({ searchParams }: Props) {
         const citiesInRadius = await getCitiesWithinRadius(zipInfo.lat, zipInfo.lng, radiusMiles);
         for (const city of citiesInRadius) {
           for (const barber of await getBarbersByCity(city.slug)) {
-            results.push({ barber, distanceMiles: city.distanceMiles });
+            const shopDist =
+              barber.latitude != null && barber.longitude != null
+                ? Math.round(distanceMiles(zipInfo.lat, zipInfo.lng, barber.latitude, barber.longitude) * 10) / 10
+                : city.distanceMiles;
+            results.push({ barber, distanceMiles: shopDist });
           }
         }
         results.sort((a, b) => (a.distanceMiles ?? 0) - (b.distanceMiles ?? 0));
@@ -196,7 +200,11 @@ export default async function SearchPage({ searchParams }: Props) {
                 for (const barber of await getBarbersByCity(city.slug)) {
                   if (!seenBarberIds.has(barber.id)) {
                     seenBarberIds.add(barber.id);
-                    results.push({ barber, distanceMiles: city.distanceMiles });
+                    const shopDist =
+                      barber.latitude != null && barber.longitude != null
+                        ? Math.round(distanceMiles(loc.lat, loc.lng, barber.latitude, barber.longitude) * 10) / 10
+                        : city.distanceMiles;
+                    results.push({ barber, distanceMiles: shopDist });
                   }
                 }
               }
