@@ -78,6 +78,23 @@ export function getEffectiveCutTypes(barber: Barber): CutType[] {
 }
 
 /**
+ * A barber/shop needs verification if fewer than 4 of these 7 data points are present:
+ * address, booking platform, services, phone, instagram, website, email
+ */
+export function needsVerification(barber: Barber): boolean {
+  if (barber.isVerified) return false;
+  let count = 0;
+  if (barber.address) count++;
+  if (barber.bookingUrl) count++;
+  if ((barber.specialties?.length ?? 0) > 0 || (barber.cutTypes?.length ?? 0) > 0) count++;
+  if (barber.phone) count++;
+  if (barber.instagram) count++;
+  if (barber.website) count++;
+  if (barber.email) count++;
+  return count < 4;
+}
+
+/**
  * Filter barbers by hair types and cut types.
  * Hair type filter: OR logic (barber matches if any selected hair type matches, or barber has "all")
  * Cut type filter: AND logic (barber must have ALL selected cut types)

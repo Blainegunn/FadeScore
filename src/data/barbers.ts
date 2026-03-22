@@ -32,6 +32,8 @@ interface BarberRow {
     instagram: string | null;
     website: string | null;
     booking_url: string | null;
+    email: string | null;
+    verified: boolean | null;
     latitude: number | null;
     longitude: number | null;
     cities: {
@@ -71,6 +73,9 @@ function mapBarberRow(row: BarberRow): Barber {
     phone: shop.phone ?? undefined,
     instagram: shop.instagram ?? undefined,
     website: shop.website ?? undefined,
+    email: shop.email ?? undefined,
+    bookingUrl: shop.booking_url ?? undefined,
+    isVerified: shop.verified ?? false,
     reviews: (shop.review_sources ?? []).map((r) => ({
       platform: r.platform as ReviewSource["platform"],
       rating: Number(r.rating),
@@ -85,7 +90,7 @@ const BARBER_SELECT = `
   id, slug, name, fade_score, review_count, avg_price,
   specialties, hair_types, cut_types, is_hidden_gem, is_cheap,
   shops!inner (
-    slug, name, address, phone, instagram, website, booking_url, latitude, longitude,
+    slug, name, address, phone, instagram, website, email, booking_url, verified, latitude, longitude,
     cities!inner ( slug, name, state ),
     review_sources ( platform, rating, review_count )
   )

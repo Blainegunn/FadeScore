@@ -55,9 +55,9 @@ function SiteHeader() {
 
 const MOBILE_NAV_ITEMS = [
   { href: "/", label: "Home", icon: "/branding/logo.png", isLogo: true },
-  { href: "/search", label: "Search", icon: "/icons/search.png", isLogo: false },
-  { href: "/hidden-gem-barbers", label: "Gems", icon: "/icons/diamond.png", isLogo: false },
   { href: "/compare", label: "Compare", icon: "/icons/compare.png", isLogo: false },
+  { href: "/hidden-gem-barbers", label: "Gems", icon: "/icons/diamond.png", isLogo: false },
+  { href: "/search", label: "Search", icon: "/icons/search.png", isLogo: false },
 ] as const;
 
 function MobileBottomNav() {
@@ -81,9 +81,7 @@ function MobileBottomNav() {
                 alt={item.label}
                 width={24}
                 height={24}
-                className={`${item.isLogo ? "h-6 w-auto object-contain" : "h-6 w-6"} ${
-                  isActive ? "opacity-100" : "opacity-40"
-                }`}
+                className={`${item.isLogo ? "h-6 w-auto object-contain" : "h-6 w-6"}`}
               />
             </Link>
           );

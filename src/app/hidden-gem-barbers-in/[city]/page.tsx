@@ -6,6 +6,7 @@ import { getCityBySlug } from "@/lib/data";
 import { getBarbersByCity } from "@/data/barbers";
 import { BarberCard } from "@/components/BarberCard";
 import { getCutTypeLinks, getHairTypeLinks } from "@/lib/seo";
+import { needsVerification } from "@/lib/filters";
 
 export const revalidate = 3600;
 
@@ -29,7 +30,7 @@ export default async function HiddenGemCityPage({ params }: Props) {
   if (!city) notFound();
 
   const allBarbers = await getBarbersByCity(city.slug);
-  const hiddenGems = allBarbers.filter((b) => b.isHiddenGem).sort((a, b) => b.fadeScore - a.fadeScore);
+  const hiddenGems = allBarbers.filter((b) => b.isHiddenGem && !needsVerification(b)).sort((a, b) => b.fadeScore - a.fadeScore);
 
   const cutTypeLinks = getCutTypeLinks(city.slug, city.name);
   const hairTypeLinks = getHairTypeLinks(city.slug, city.name);

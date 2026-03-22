@@ -5,6 +5,7 @@ import { getCityPageStats } from "@/lib/data";
 import { CityFilters } from "@/components/CityFilters";
 import { getCityListJsonLd } from "@/lib/schema";
 import { getCutTypeLinks, getHairTypeLinks } from "@/lib/seo";
+import { needsVerification } from "@/lib/filters";
 
 interface CityPageTemplateProps {
   citySlug: string;
@@ -29,8 +30,8 @@ export function CityPageTemplate({
 }: CityPageTemplateProps) {
   const { avgPrice, topBarberName, topBarberScore } = getCityPageStats(cityName, barbers);
   const top20 = barbers.slice(0, 20);
-  const hiddenGems = barbers.filter((b) => b.isHiddenGem).slice(0, 5);
-  const cheapBarbers = barbers.filter((b) => b.isCheap).slice(0, 5);
+  const hiddenGems = barbers.filter((b) => b.isHiddenGem && !needsVerification(b)).slice(0, 5);
+  const cheapBarbers = barbers.filter((b) => b.isCheap && !needsVerification(b)).slice(0, 5);
 
   const goodBarbers = barbers.filter((b) => b.fadeScore >= 4.5);
   const goodMin = goodBarbers.length > 0 ? Math.min(...goodBarbers.map((b) => b.avgPrice)) : avgPrice;

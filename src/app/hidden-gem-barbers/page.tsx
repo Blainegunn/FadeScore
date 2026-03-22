@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getAllBarbersForHiddenGems } from "@/data/barbers";
 import { BarberCard } from "@/components/BarberCard";
+import { needsVerification } from "@/lib/filters";
 
 export const revalidate = 3600;
 
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function HiddenGemBarbersPage() {
-  const barbers = await getAllBarbersForHiddenGems();
+  const allGems = await getAllBarbersForHiddenGems();
+  const barbers = allGems.filter((b) => !needsVerification(b));
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 py-10 pb-16">
       <h1 className="text-4xl font-bold tracking-tight text-fade-navy mb-4">

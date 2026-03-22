@@ -21,11 +21,14 @@ export interface Barber {
   cutTypes?: CutType[];
   isHiddenGem?: boolean;
   isCheap?: boolean;
+  isVerified?: boolean;
   /** Real barber data fields (optional, only for curated entries) */
   address?: string;
   phone?: string;
   instagram?: string;
   website?: string;
+  email?: string;
+  bookingUrl?: string;
   reviews?: ReviewSource[];
   barbers?: { name: string; slug?: string; rating: number; reviewCount: number }[];
   latitude?: number;

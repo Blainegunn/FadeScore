@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Barber } from "@/types";
-import { getEffectiveCutTypes } from "@/lib/filters";
+import { getEffectiveCutTypes, needsVerification } from "@/lib/filters";
 import { CUT_TYPE_LABELS } from "@/lib/filters";
 import { useCompare } from "@/context/CompareContext";
 
@@ -30,7 +30,8 @@ function formatCardLocation(barber: Barber): string {
 
 export function BarberCard({ barber, rank, distanceMiles, showVerified = true }: BarberCardProps) {
   const cutTypes = getEffectiveCutTypes(barber).slice(0, 3);
-  const showBestValue = isBestValue(barber);
+  const unverified = needsVerification(barber);
+  const showBestValue = !unverified && isBestValue(barber);
   const isBarber = isIndividualBarber(barber);
   const { toggle, isSelected, isFull } = useCompare();
   const selected = isSelected(barber.slug);
@@ -62,7 +63,19 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
             <span className="text-xs font-bold text-fade-accent">#{rank}</span>
           )}
           <div className="flex flex-wrap justify-end gap-1">
-            {barber.isHiddenGem && (
+            {barber.isVerified && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-lime-50 px-2 py-0.5 text-xs font-medium text-lime-800 border border-lime-200/60">
+                <Image src="/icons/verified.png" alt="" width={14} height={14} className="object-contain shrink-0" />
+                Verified
+              </span>
+            )}
+            {unverified && !barber.isVerified && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700 border border-amber-200/60">
+                <Image src="/icons/warning.png" alt="" width={14} height={14} className="object-contain shrink-0" />
+                Unverified
+              </span>
+            )}
+            {!unverified && barber.isHiddenGem && (
               <span className="inline-flex items-center gap-1 text-xs font-medium text-fade-accent">
                 <Image src="/icons/diamond.png" alt="" width={14} height={14} />
                 Hidden Gem
@@ -147,7 +160,7 @@ export function BarberCard({ barber, rank, distanceMiles, showVerified = true }:
           ))}
         </div>
       )}
-      {/* Verified badge — hidden until shops are manually verified */}
+      {/* spacer */}
       <div className="min-h-0 flex-1" aria-hidden />
       <button
         onClick={handleCompare}

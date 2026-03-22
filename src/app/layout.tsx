@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 const pangolin = localFont({
-  src: "../fonts/pangolin-regular.ttf",
+  src: "../fonts/pangolin-regular.woff2",
   variable: "--font-pangolin",
   display: "swap",
   weight: "400",

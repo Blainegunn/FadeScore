@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { HomeSearch } from "@/components/HomeSearch";
 import { getAllBarbersForHiddenGems } from "@/data/barbers";
 
+export const revalidate = 3600;
+
 
 const POPULAR_CITIES = [
   "new-york",
